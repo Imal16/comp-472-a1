@@ -1,0 +1,93 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Best-MLP",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": ["-algo", "best-mlp", "-func", "sigmoid", "-layers", "1", "-nodes", "30+50", "-solver", "adam", "-dataset", "1"]
+        },
+        {
+            "name": "Python: Base-MLP",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": [
+                "-algo",
+                "base-mlp",
+                "-dataset", "1"
+            ]
+        },
+        {
+            "name": "Python: Percecptron",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": [
+                "-algo",
+                "per",
+                "-dataset", "1"
+            ]
+        },
+        {
+            "name": "Python: Best-DT",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": [
+                "-algo",
+                "best-dt",
+                "-split",
+                "gini",
+                "-depth",
+                "10",
+                "-samples",
+                "5",
+                "-impurity",
+                "5",
+                "-weight",
+                "none",
+                "-dataset", "1"
+            ]
+        },
+        {
+            "name": "Python: Base-DT",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": [
+                "-algo",
+                "base-dt",
+                "-dataset", "1"
+            ]
+        },
+        {
+            "name": "Python: GNB",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": [
+                "-algo",
+                "gnb",
+                "-dataset", "1"
+            ]
+        },
+        {
+            "name": "Python: No Args",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal"
+        }
+    ]
+}
