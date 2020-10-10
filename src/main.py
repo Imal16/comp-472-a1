@@ -37,21 +37,23 @@ def buildSymbolTable(fileName):
 def getArgs():
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("-algo", choices=possible_algo, required=True)
-    parser.add_argument("-dataset", type=int, choices=[1, 2], required=True)
+    parser.add_argument("algo", choices=possible_algo, help="Algorithm to be run. See choices list.")
+    parser.add_argument("dataset", type=int, choices=[1, 2], help="Dataset number.")
+
+    #Best-DT and Best-MLP require several more arguments. We will probably have to figure out some defaults as we go along.
 
     #Best-DT arguments
-    parser.add_argument("-split", choices=["gini", "entropy"], default="gini", required=False)
-    parser.add_argument("-depth", type=int, required=False)
-    parser.add_argument("-samples", type=int, required=False)
-    parser.add_argument("-impurity", type=int, required=False)
-    parser.add_argument("-weight", choices=["none", "balanced"], required=False)
+    parser.add_argument("-split", choices=["gini", "entropy"])
+    parser.add_argument("-depth", type=int)
+    parser.add_argument("-samples", type=int)
+    parser.add_argument("-impurity", type=int)
+    parser.add_argument("-weight", choices=["none", "balanced"])
 
     #Best-MLP arguments
-    parser.add_argument("-func", choices=["sigmoid", "tanh", "relu", "identity"], required=False)
-    parser.add_argument("-layers", type=int, required=False)
-    parser.add_argument("-nodes", required=False)                      #TO BE DETERMINED, haven't learned how multi layer NN works yet
-    parser.add_argument("-solver", choices=["adam", "sgd"], required=False)      
+    parser.add_argument("-func", choices=["sigmoid", "tanh", "relu", "identity"])
+    parser.add_argument("-layers", type=int)
+    parser.add_argument("-nodes")                      #TO BE DETERMINED, haven't learned how multi layer NN works yet
+    parser.add_argument("-solver", choices=["adam", "sgd"])      
 
     return parser.parse_args()
     
