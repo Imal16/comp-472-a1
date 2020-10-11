@@ -1,12 +1,20 @@
 #####By Ihsaan Malek and Olivier Racette####
-import sklearn
-import csv
+
+#External dependencies
+#import sklearn    #might be better to import specific things in each file
 import numpy as np
+
+#Default modules
+import csv
 import sys
 import argparse
 from pathlib import Path
 
+#Algorithms
+import basedt, basemlp, bestdt, bestmlp, gnb, per
 
+
+#potential globals? will be moved if needed
 data_folder = Path("dataset/")
 possible_algo = ["gnb", "base-dt", "best-dt", "per", "base-mlp", "best-mlp"]
 
@@ -59,7 +67,8 @@ def getArgs():
     
 
 #Runs stuff
-def run(args):
+def run():
+    args = getArgs()
     dataset = str(args.dataset)
 
     print("Reading csv data from dataset " + dataset + "...")
@@ -72,7 +81,12 @@ def run(args):
 
     print("Done!")
 
+    #forgot switch statements don't exist in python. bunch of if elif coming soon.
+    if args.algo == possible_algo[0]:
+        gnb.run(test_with_label, training, validation)
+
+
     #From here, run the specified training algorithm
 
 if __name__ == "__main__":
-    run(getArgs())
+    run()
