@@ -67,14 +67,24 @@
             ]
         },
         {
-            "name": "Python: GNB",
+            "name": "Python: GNB 1",
             "type": "python",
             "request": "launch",
-            "program": "${file}",
+            "program": "${workspaceFolder}\\src\\main.py",
             "console": "integratedTerminal",
             "args": [
                 "gnb",
                 "1"
+            ]
+        },{
+            "name": "Python: GNB 2",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}\\src\\main.py",
+            "console": "integratedTerminal",
+            "args": [
+                "gnb",
+                "2"
             ]
         },
         {

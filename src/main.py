@@ -85,8 +85,9 @@ def run():
     if args.algo == possible_algo[0]:
         gnb.run(test_with_label, training, validation)
 
+    #should the algorithms return predictions? and from here (this file) compute the rest of results, since its the same computation for every algo?
 
-    #From here, run the specified training algorithm
+
 
 if __name__ == "__main__":
     run()
