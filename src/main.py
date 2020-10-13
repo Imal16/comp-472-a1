@@ -92,7 +92,7 @@ def run():
     elif args.algo == possible_algo[1]:
         result = basedt.run(test_with_label, training, validation)
     elif args.algo == possible_algo[2]:
-        result = bestdt.run(test_with_label, training, validation, args.split, args.samples, args.impurity, args.weight)
+        result = bestdt.run(test_with_label, training, validation, args.split, args.depth, args.samples, args.impurity, args.weight)
     elif args.algo == possible_algo[3]:
         result = per.run(test_with_label, training, validation)
     elif args.algo == possible_algo[4]:
