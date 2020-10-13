@@ -82,11 +82,31 @@ def run():
     print("Done!")
 
     #forgot switch statements don't exist in python. bunch of if elif coming soon.
+    #theres probably a better way to do this.
+    #does validation need to be passed? seems like its not really used here. 
+
+    result = 0
+
     if args.algo == possible_algo[0]:
-        gnb.run(test_with_label, training, validation)
+        result = gnb.run(test_with_label, training, validation)
+    elif args.algo == possible_algo[1]:
+        result = basedt.run(test_with_label, training, validation)
+    elif args.algo == possible_algo[2]:
+        result = bestdt.run(test_with_label, training, validation, args.split, args.samples, args.impurity, args.weight)
+    elif args.algo == possible_algo[3]:
+        result = per.run(test_with_label, training, validation)
+    elif args.algo == possible_algo[4]:
+        result = basemlp.run(test_with_label, training, validation)
+    elif args.algo == possible_algo[5]:
+        result = bestmlp.run(test_with_label, training, validation, args.func, args.layers, args.nodes, args.solver) 
 
     #should the algorithms return predictions? and from here (this file) compute the rest of results, since its the same computation for every algo?
+    analyze(test_with_label, validation, result)
 
+
+#Seems like every algorihtm returns a similar result, prediction of y values. we can probably use the same method to analyze results of each
+def analyze(test, validation, prediction):
+    return 0
 
 
 if __name__ == "__main__":
