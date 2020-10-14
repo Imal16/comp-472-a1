@@ -5,18 +5,27 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: Best-MLP",
+            "name": "Python: Best-MLP 1",
             "type": "python",
             "request": "launch",
-            "program": "${file}",
+            "program": "${workspaceFolder}\\src\\main.py",
             "console": "integratedTerminal",
-            "args": ["best-mlp", "1","-func", "sigmoid", "-layers", "1", "-nodes", "30+50", "-solver", "adam"]
+            "args": ["best-mlp", "1", "-narch1", "30", "50", "-narch2", "10", "10", "10"]
+        },
+        
+        {
+            "name": "Python: Best-MLP 2",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}\\src\\main.py",
+            "console": "integratedTerminal",
+            "args": ["best-mlp", "2", "-narch1", "30", "50", "-narch2", "10", "10", "10"]
         },
         {
-            "name": "Python: Base-MLP",
+            "name": "Python: Base-MLP 1",
             "type": "python",
             "request": "launch",
-            "program": "${file}",
+            "program": "${workspaceFolder}\\src\\main.py",
             "console": "integratedTerminal",
             "args": [
                 "base-mlp",
@@ -24,10 +33,21 @@
             ]
         },
         {
+            "name": "Python: Base-MLP 2",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}\\src\\main.py",
+            "console": "integratedTerminal",
+            "args": [
+                "base-mlp",
+                "2"
+            ]
+        },
+        {
             "name": "Python: Percecptron",
             "type": "python",
             "request": "launch",
-            "program": "${file}",
+            "program": "${workspaceFolder}\\src\\main.py",
             "console": "integratedTerminal",
             "args": [
                 "per",
@@ -38,7 +58,7 @@
             "name": "Python: Best-DT",
             "type": "python",
             "request": "launch",
-            "program": "${file}",
+            "program": "${workspaceFolder}\\src\\main.py",
             "console": "integratedTerminal",
             "args": [
                 "best-dt",
@@ -59,7 +79,7 @@
             "name": "Python: Base-DT",
             "type": "python",
             "request": "launch",
-            "program": "${file}",
+            "program": "${workspaceFolder}\\src\\main.py",
             "console": "integratedTerminal",
             "args": [
                 "base-dt",
@@ -91,7 +111,7 @@
             "name": "Python: No Args",
             "type": "python",
             "request": "launch",
-            "program": "${file}",
+            "program": "${workspaceFolder}\\src\\main.py",
             "console": "integratedTerminal"
         }
     ]
