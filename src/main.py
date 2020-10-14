@@ -15,7 +15,7 @@ import basedt, basemlp, bestdt, bestmlp, gnb, per
 
 
 #potential globals? will be moved if needed
-data_folder = Path("dataset/")
+data_folder = Path("../dataset/")
 possible_algo = ["gnb", "base-dt", "best-dt", "per", "base-mlp", "best-mlp"]
 
 
@@ -90,9 +90,9 @@ def run():
     if args.algo == possible_algo[0]:
         result = gnb.run(test_with_label, training, validation)
     elif args.algo == possible_algo[1]:
-        result = basedt.run(test_with_label, training, validation)
+        result = basedt.run(test_with_label, training, validation, dataset)
     elif args.algo == possible_algo[2]:
-        result = bestdt.run(test_with_label, training, validation, args.split, args.depth, args.samples, args.impurity, args.weight)
+        result = bestdt.run(test_with_label, training, validation, args.split, args.depth, args.samples, args.impurity, args.weight, dataset)
     elif args.algo == possible_algo[3]:
         result = per.run(test_with_label, training, validation)
     elif args.algo == possible_algo[4]:
