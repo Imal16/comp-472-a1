@@ -3,6 +3,8 @@
 #External dependencies
 #import sklearn    #might be better to import specific things in each file
 import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib import colors
 
 #Default modules
 import csv
@@ -27,17 +29,18 @@ def get_data(fileName):
 
 
 #numpy's methods to read from files don't seem to work well with the info_x files...
-#Returns dictionary where key is index, value is a character
+#Returns a numpy array with each symbol at the assigned index.
 def buildSymbolTable(fileName):
-    symbols = {}
+    symbols = []
 
     with open(data_folder / fileName) as file:
         reader = csv.DictReader(file)
 
         for row in reader:
-            symbols[int(row['index'])] = row['symbol']
+            symbols.insert(int(row['index']), row['symbol'])
     
-    return symbols
+    return np.array(symbols)
+
 
 #Returns command line arguments object (Namespace)
 #To get the value of an argument, just call object.argumentName
@@ -64,7 +67,34 @@ def getArgs():
     parser.add_argument("-solver", choices=["adam", "sgd"])      
 
     return parser.parse_args()
-    
+
+
+#Plots distribution of the number of instances of each class
+#Assumes the label is present at the end of the data matrix!!
+def calc_distrib(data, info):
+    distr = np.zeros(len(info), dtype=int)
+
+    for i in data:
+        distr[i[-1]] += 1
+
+    return distr
+
+
+def plot_distrib(distrib, info, title):
+    fig, ax = plt.subplots(1,1)
+
+    x = np.arange(len(distrib))
+    ax.bar(x, distrib, align="center")
+
+    ax.xaxis.set_major_locator(plt.FixedLocator(x))
+    ax.xaxis.set_major_formatter(plt.FixedFormatter(info))
+
+    plt.title(title)
+    plt.xlabel("Symbol")
+    plt.ylabel("Frequency")
+
+    plt.show()
+
 
 #Runs stuff
 def run():
@@ -80,6 +110,19 @@ def run():
     info = buildSymbolTable("info_" + dataset + ".csv")    
 
     print("Done!")
+
+
+    print("Calculating data distribution...")
+    train_distrib = calc_distrib(training, info)
+    valid_distrib = calc_distrib(validation, info)
+    test_distrib = calc_distrib(test_with_label, info)
+    print("Done!")
+
+    print("Plotting...")
+
+    plot_distrib(train_distrib, info, "Training Distribution")
+    plot_distrib(valid_distrib, info, "Validation Distribution")
+    plot_distrib(test_distrib, info, "Test Distribution (Real)")
 
     #forgot switch statements don't exist in python. bunch of if elif coming soon.
     #theres probably a better way to do this.
@@ -98,7 +141,7 @@ def run():
     elif args.algo == possible_algo[4]:
         result = basemlp.run(test_with_label, training, validation)
     elif args.algo == possible_algo[5]:
-        result = bestmlp.run(test_with_label, training, validation, args.func, args.layers, args.nodes, args.solver) 
+        result = bestmlp.run(test_with_label, training, validation, args.func, args.layers, args.nodes, args.solver)
 
     #should the algorithms return predictions? and from here (this file) compute the rest of results, since its the same computation for every algo?
     analyze(test_with_label, validation, result)
