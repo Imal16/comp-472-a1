@@ -64,7 +64,10 @@ def getArgs():
     parser.add_argument("-func", choices=["sigmoid", "tanh", "relu", "identity"])
     parser.add_argument("-layers", type=int)
     parser.add_argument("-nodes")                      #TO BE DETERMINED, haven't learned how multi layer NN works yet
-    parser.add_argument("-solver", choices=["adam", "sgd"])      
+    parser.add_argument("-solver", choices=["adam", "sgd"])
+
+    #For visualization
+    parser.add_argument("-visual", help="show data visualization", action="store_true")      
 
     return parser.parse_args()
 
@@ -80,18 +83,38 @@ def calc_distrib(data, info):
     return distr
 
 
-def plot_distrib(distrib, info, title):
-    fig, ax = plt.subplots(1,1)
 
-    x = np.arange(len(distrib))
-    ax.bar(x, distrib, align="center")
+#Plots the distribution of training, validation and test in a 3 bar graph
+def plot_distrib(train_distrib, val_distrib, test_distrib, info):
+    fig, ax = plt.subplots()
+    width = 0.25
 
+    x = np.arange(len(info))
+
+    ax.bar(x - width, train_distrib, width, label="Trainig")
+    ax.bar(x, val_distrib, width, label="Validation")
+    ax.bar(x + width, test_distrib, width, label="Test")
+
+
+    #setting custom labels: put symbols (user input) instead of numbers on the x avis
     ax.xaxis.set_major_locator(plt.FixedLocator(x))
     ax.xaxis.set_major_formatter(plt.FixedFormatter(info))
 
-    plt.title(title)
+
+    #plot configuration
+    plt.title("Distribution of Instances")
     plt.xlabel("Symbol")
     plt.ylabel("Frequency")
+    ax.legend()
+    ax.grid(True, axis='y', alpha=0.35)
+
+    #Turning this off because theres way too much stuff on dataset 2. causes the graph to look terrible.
+    #making the list of ticks that will go on the y axis
+    #max_y = np.array([train_distrib.max(), val_distrib.max(), test_distrib.max()]).max()
+    #max_y = max_y - (max_y % 5) + 5
+    #y_ticks = np.arange(0, max_y, 5)
+    #ax.set_yticks(y_ticks)
+
 
     plt.show()
 
@@ -118,11 +141,11 @@ def run():
     test_distrib = calc_distrib(test_with_label, info)
     print("Done!")
 
-    print("Plotting...")
 
-    plot_distrib(train_distrib, info, "Training Distribution")
-    plot_distrib(valid_distrib, info, "Validation Distribution")
-    plot_distrib(test_distrib, info, "Test Distribution (Real)")
+    if(args.visual):
+        print("Plotting...")
+        plot_distrib(train_distrib, valid_distrib, test_distrib, info)
+
 
     #forgot switch statements don't exist in python. bunch of if elif coming soon.
     #theres probably a better way to do this.

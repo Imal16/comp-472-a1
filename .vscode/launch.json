@@ -77,6 +77,30 @@
                 "1"
             ]
         },{
+            "name": "Python: GNB 1 V",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}\\src\\main.py",
+            "console": "integratedTerminal",
+            "args": [
+                "gnb",
+                "1",
+                "-v"
+            ]
+        },
+        {
+            "name": "Python: GNB 2 V",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}\\src\\main.py",
+            "console": "integratedTerminal",
+            "args": [
+                "gnb",
+                "2",
+                "-v"
+            ]
+        },
+        {
             "name": "Python: GNB 2",
             "type": "python",
             "request": "launch",
