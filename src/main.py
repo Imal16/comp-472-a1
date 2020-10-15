@@ -4,12 +4,14 @@
 #import sklearn    #might be better to import specific things in each file
 import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib import colors
+from matplotlib.colors import ListedColormap
+
 
 #Default modules
 import csv
 import sys
 import argparse
+import random
 from pathlib import Path
 
 #Algorithms
@@ -19,7 +21,7 @@ import basedt, basemlp, bestdt, bestmlp, gnb, per
 #potential globals? will be moved if needed
 data_folder = Path("dataset/")
 possible_algo = ["gnb", "base-dt", "best-dt", "per", "base-mlp", "best-mlp"]
-
+num_vis_samples = 5
 
 #Shorthand for numpy's loadtxt method.
 #Returns matrices of integers.
@@ -108,14 +110,13 @@ def plot_distrib(train_distrib, val_distrib, test_distrib, info):
     ax.legend()
     ax.grid(True, axis='y', alpha=0.35)
 
-    #Turning this off because theres way too much stuff on dataset 2. causes the graph to look terrible.
-    #making the list of ticks that will go on the y axis
-    #max_y = np.array([train_distrib.max(), val_distrib.max(), test_distrib.max()]).max()
-    #max_y = max_y - (max_y % 5) + 5
-    #y_ticks = np.arange(0, max_y, 5)
-    #ax.set_yticks(y_ticks)
+    plt.show()
 
-
+#Shows the character a sample is supposed to represent.
+#Assumes the sample is an array of length 1024
+def visualize_sample(sample, real, predict):
+    plt.matshow(sample.reshape(32 ,32), cmap=ListedColormap(['k', 'w']))
+    plt.text(-6, -3, "Prediction: " + predict + "\nReal: " + real)
     plt.show()
 
 
@@ -142,9 +143,9 @@ def run():
     print("Done!")
 
 
-    if(args.visual):
+    if args.visual:
         print("Plotting...")
-        plot_distrib(train_distrib, valid_distrib, test_distrib, info)
+        #plot_distrib(train_distrib, valid_distrib, test_distrib, info)
 
 
     #forgot switch statements don't exist in python. bunch of if elif coming soon.
@@ -165,6 +166,11 @@ def run():
         result = basemlp.run(test_with_label, training, validation)
     elif args.algo == possible_algo[5]:
         result = bestmlp.run(test_with_label, training, validation, args.func, args.layers, args.nodes, args.solver)
+
+    if args.visual:
+        for i in range(num_vis_samples):
+            index = random.randint(0, len(result)-1)
+            visualize_sample(test_no_label[index], info[test_with_label[index][-1]], info[result[index]])
 
     #should the algorithms return predictions? and from here (this file) compute the rest of results, since its the same computation for every algo?
     analyze(test_with_label, validation, result)
