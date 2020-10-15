@@ -50,13 +50,15 @@ def getArgs():
 
     #Best-DT and Best-MLP require several more arguments. We will probably have to figure out some defaults as we go along.
 
-    #Best-DT arguments
-    parser.add_argument("-split", choices=["gini", "entropy"])
-    parser.add_argument("-depth", type=int)
-    parser.add_argument("-samples", type=int)
-    parser.add_argument("-impurity", type=int)
-    parser.add_argument("-weight", choices=["none", "balanced"])
-
+# =============================================================================
+#     #Best-DT arguments
+#     parser.add_argument("-split", choices=["gini", "entropy"])
+#     parser.add_argument("-depth", type=int)
+#     parser.add_argument("-samples", type=int)
+#     parser.add_argument("-impurity", type=int)
+#     parser.add_argument("-weight", choices=["none", "balanced"])
+# 
+# =============================================================================
     #Best-MLP arguments
     parser.add_argument("-func", choices=["sigmoid", "tanh", "relu", "identity"])
     parser.add_argument("-layers", type=int)
@@ -92,9 +94,10 @@ def run():
     elif args.algo == possible_algo[1]:
         result = basedt.run(test_with_label, training, validation, dataset)
     elif args.algo == possible_algo[2]:
-        result = bestdt.run(test_with_label, training, validation, args.split, args.depth, args.samples, args.impurity, args.weight, dataset)
+        #result = bestdt.run(test_with_label, training, validation, args.split, args.depth, args.samples, args.impurity, args.weight, dataset)
+        result = bestdt.run(test_with_label, training, validation,dataset)
     elif args.algo == possible_algo[3]:
-        result = per.run(test_with_label, training, validation)
+        result = per.run(test_with_label, training, validation, dataset)
     elif args.algo == possible_algo[4]:
         result = basemlp.run(test_with_label, training, validation)
     elif args.algo == possible_algo[5]:
