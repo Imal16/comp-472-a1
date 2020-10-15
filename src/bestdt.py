@@ -27,11 +27,11 @@ def run(test, train, val, dataset):
 #     else: depth = int(depth)
 # =============================================================================
     default_range = np.linspace(0,10,10,dtype=int).astype(float).tolist()
-    
+    default_range2 = np.linspace(2,12,10,dtype=int).tolist()
     
     params = {'criterion' : ["gini", "entropy"], 
                   'max_depth': [10, None], 
-                  'min_samples_split':default_range, 
+                  'min_samples_split':default_range2, 
                   'min_impurity_decrease':default_range, 
                   'class_weight':['balanced', None]
                   }
@@ -40,10 +40,10 @@ def run(test, train, val, dataset):
     dt = DecisionTreeClassifier()
     
     clf = GridSearchCV(estimator = dt, param_grid = params)
-    print(clf)
-    print("Best parameters: ", clf.best_params_)
-    y_pred = clf.predict(test_x)
+    #print(clf)
+    y_pred = clf.fit(train_x, train_y).predict(test_x)
     
+    print("Best parameters: ", clf.best_params_)
     
     confusion_mat = confusion_matrix(test_y, y_pred)
     class_report = classification_report(test_y, y_pred, labels = class_labels, output_dict = True)
