@@ -112,6 +112,7 @@ def plot_distrib(train_distrib, val_distrib, test_distrib, info):
 
     plt.show()
 
+
 #Shows the character a sample is supposed to represent.
 #Assumes the sample is an array of length 1024
 def visualize_sample(sample, real, predict):
@@ -145,7 +146,7 @@ def run():
 
     if args.visual:
         print("Plotting...")
-        #plot_distrib(train_distrib, valid_distrib, test_distrib, info)
+        plot_distrib(train_distrib, valid_distrib, test_distrib, info)
 
 
     #forgot switch statements don't exist in python. bunch of if elif coming soon.
@@ -170,7 +171,7 @@ def run():
     if args.visual:
         for i in range(num_vis_samples):
             index = random.randint(0, len(result)-1)
-            visualize_sample(test_no_label[index], info[test_with_label[index][-1]], info[result[index]])
+            visualize_sample(test_no_label[index], info[test_with_label[index][-1]], info[result[index]])       #holy moly brackets!
 
     #should the algorithms return predictions? and from here (this file) compute the rest of results, since its the same computation for every algo?
     analyze(test_with_label, validation, result)
