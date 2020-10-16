@@ -60,10 +60,11 @@ def getArgs():
 # 
 # =============================================================================
     #Best-MLP arguments
-    parser.add_argument("-func", choices=["sigmoid", "tanh", "relu", "identity"])
-    parser.add_argument("-layers", type=int)
-    parser.add_argument("-nodes")                      #TO BE DETERMINED, haven't learned how multi layer NN works yet
-    parser.add_argument("-solver", choices=["adam", "sgd"])      
+    #parser.add_argument("-func", choices=["logistic", "tanh", "relu", "identity"])
+    #parser.add_argument("-layers", type=int)                    #don't really need -layers if we can build a list of ndoes per layer. num of layer = len(list_of_nodes)
+    parser.add_argument("-narch1", nargs="+", type=int)          #with nargs, user can enter multiple arguments for 1 option. '+' means 1 or more arguments. this builds a list of integers.
+    parser.add_argument("-narch2", nargs="+", type=int)
+    #parser.add_argument("-solver", choices=["adam", "sgd"])      
 
     return parser.parse_args()
     
@@ -101,7 +102,7 @@ def run():
     elif args.algo == possible_algo[4]:
         result = basemlp.run(test_with_label, training, validation)
     elif args.algo == possible_algo[5]:
-        result = bestmlp.run(test_with_label, training, validation, args.func, args.layers, args.nodes, args.solver) 
+        result = bestmlp.run(test_with_label, training, validation, args.narch1, args.narch2) 
 
     #should the algorithms return predictions? and from here (this file) compute the rest of results, since its the same computation for every algo?
     analyze(test_with_label, validation, result)
