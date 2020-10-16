@@ -1,8 +1,11 @@
 from sklearn.naive_bayes import GaussianNB
+from sklearn.metrics import classification_report, confusion_matrix
+
 import numpy as np
+import output_file_creator
 
 #Runs Gaussian Naives Bayes with default parameters
-def run(test, train, val):
+def run(test, train, info, dataset):
     print("Running Gaussian Naive Bayes...")
 
     #datasets need to be split up between x (features) and y (label)
@@ -16,12 +19,18 @@ def run(test, train, val):
 
     gnb = GaussianNB()
     y_pred = gnb.fit(train_x, train_y).predict(test_x)
+    
+    print("Done!")
 
-    #Next up, need to:
-    #plot confusion matrix
-    #precision, recall and f1 measure for each class
-    #accuracy, macro average f1 and weighted-average f1 of the model
+
+    print('Creating output file...')
+
+    class_labels = np.arange(0, len(info))
+    confusion_mat = confusion_matrix(test_y, y_pred)
+    class_report = classification_report(test_y, y_pred, labels = class_labels, output_dict = True)
+    output_file_creator.create_csv('GNB', np.arange(1, len(test_x)+1), y_pred, confusion_mat, class_report,dataset)
 
     print("Done!")
+ 
 
     return y_pred

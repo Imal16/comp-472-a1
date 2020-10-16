@@ -11,7 +11,7 @@ import numpy as np
 
 def create_csv(filename, test_y, y_pred, confusion_mat, class_report,dataset):
     
-    result = np.column_stack((y_pred,test_y))
+    result = np.column_stack((test_y, y_pred))
     file_path ="../result/{}-DS{}.csv".format(filename,dataset)
     
     if os.path.exists(file_path):

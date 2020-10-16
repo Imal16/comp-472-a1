@@ -12,6 +12,7 @@ import csv
 import sys
 import argparse
 import random
+import time
 from pathlib import Path
 
 #Algorithms
@@ -59,7 +60,7 @@ def getArgs():
     parser.add_argument("-narch2", nargs="+", type=int)     
 
     #For visualization
-    parser.add_argument("-visual", help="show data visualization", action="store_true") 
+    parser.add_argument("-visual", help="show data visualization", action="store_true")    #I figure it should always be visual
 
     return parser.parse_args()
 
@@ -145,18 +146,22 @@ def run():
 
     result = 0
 
+    start_time = time.time()
+
     if args.algo == possible_algo[0]:
-        result = gnb.run(test_with_label, training, validation)
+        result = gnb.run(test_with_label, training, info, dataset)
     elif args.algo == possible_algo[1]:
-        result = basedt.run(test_with_label, training, validation, dataset)
+        result = basedt.run(test_with_label, training, info, dataset)
     elif args.algo == possible_algo[2]:
-        result = bestdt.run(test_with_label, training, validation,dataset)
+        result = bestdt.run(test_with_label, training, validation, info, dataset)
     elif args.algo == possible_algo[3]:
-        result = per.run(test_with_label, training, validation, dataset)
+        result = per.run(test_with_label, training, validation, info, dataset)
     elif args.algo == possible_algo[4]:
-        result = basemlp.run(test_with_label, training, validation)
+        result = basemlp.run(test_with_label, training, info, dataset)
     elif args.algo == possible_algo[5]:
-        result = bestmlp.run(test_with_label, training, validation, args.narch1, args.narch2)
+        result = bestmlp.run(test_with_label, training, validation, info, dataset, args.narch1, args.narch2)
+
+    print("Execution time: " + str(round(time.time() - start_time, 2)) + " seconds.")
 
     if args.visual:
         for i in range(num_vis_samples):

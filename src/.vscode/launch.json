@@ -44,7 +44,18 @@
             ]
         },
         {
-            "name": "Python: Percecptron",
+            "name": "Python: Per 1",
+            "type": "python",
+            "request": "launch",
+            "program": "main.py",
+            "console": "integratedTerminal",
+            "args": [
+                "per",
+                "1"
+            ]
+        },
+        {
+            "name": "Python: Per 2",
             "type": "python",
             "request": "launch",
             "program": "main.py",
