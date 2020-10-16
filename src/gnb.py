@@ -17,9 +17,6 @@ def run(test, train, val):
     gnb = GaussianNB()
     y_pred = gnb.fit(train_x, train_y).predict(test_x)
 
-    #THIS IS COPY PASTED FROM https://scikit-learn.org/stable/modules/naive_bayes.html#gaussian-naive-bayes
-    #print("Number of mislabeled points out of a total %d points : %d" % (test_x.shape[0], (test_y != y_pred).sum()))
-
     #Next up, need to:
     #plot confusion matrix
     #precision, recall and f1 measure for each class

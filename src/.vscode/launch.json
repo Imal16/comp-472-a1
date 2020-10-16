@@ -112,7 +112,7 @@
             "name": "Python: GNB 1 V",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}\\src\\main.py",
+            "program": "main.py",
             "console": "integratedTerminal",
             "args": [
                 "gnb",
@@ -124,7 +124,7 @@
             "name": "Python: GNB 2 V",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}\\src\\main.py",
+            "program": "main.py",
             "console": "integratedTerminal",
             "args": [
                 "gnb",
