@@ -39,6 +39,7 @@ def buildSymbolTable(fileName):
     
     return symbols
 
+
 #Returns command line arguments object (Namespace)
 #To get the value of an argument, just call object.argumentName
 #Could also be a dictionary, return vars(parser.parse_args()) instead
@@ -48,23 +49,9 @@ def getArgs():
     parser.add_argument("algo", choices=possible_algo, help="Algorithm to be run. See choices list.")
     parser.add_argument("dataset", type=int, choices=[1, 2], help="Dataset number.")
 
-    #Best-DT and Best-MLP require several more arguments. We will probably have to figure out some defaults as we go along.
-
-# =============================================================================
-#     #Best-DT arguments
-#     parser.add_argument("-split", choices=["gini", "entropy"])
-#     parser.add_argument("-depth", type=int)
-#     parser.add_argument("-samples", type=int)
-#     parser.add_argument("-impurity", type=int)
-#     parser.add_argument("-weight", choices=["none", "balanced"])
-# 
-# =============================================================================
     #Best-MLP arguments
-    #parser.add_argument("-func", choices=["logistic", "tanh", "relu", "identity"])
-    #parser.add_argument("-layers", type=int)                    #don't really need -layers if we can build a list of ndoes per layer. num of layer = len(list_of_nodes)
     parser.add_argument("-narch1", nargs="+", type=int)          #with nargs, user can enter multiple arguments for 1 option. '+' means 1 or more arguments. this builds a list of integers.
-    parser.add_argument("-narch2", nargs="+", type=int)
-    #parser.add_argument("-solver", choices=["adam", "sgd"])      
+    parser.add_argument("-narch2", nargs="+", type=int)     
 
     return parser.parse_args()
     
@@ -95,7 +82,6 @@ def run():
     elif args.algo == possible_algo[1]:
         result = basedt.run(test_with_label, training, validation, dataset)
     elif args.algo == possible_algo[2]:
-        #result = bestdt.run(test_with_label, training, validation, args.split, args.depth, args.samples, args.impurity, args.weight, dataset)
         result = bestdt.run(test_with_label, training, validation,dataset)
     elif args.algo == possible_algo[3]:
         result = per.run(test_with_label, training, validation, dataset)

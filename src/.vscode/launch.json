@@ -22,10 +22,21 @@
             "args": ["best-mlp", "2", "-narch1", "30", "50", "-narch2", "10", "10", "10"]
         },
         {
+            "name": "Python: Base-MLP 1",
+            "type": "python",
+            "request": "launch",
+            "program": "main.py",
+            "console": "integratedTerminal",
+            "args": [
+                "base-mlp",
+                "1"
+            ]
+        },
+        {
             "name": "Python: Base-MLP 2",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}\\src\\main.py",
+            "program": "main.py",
             "console": "integratedTerminal",
             "args": [
                 "base-mlp",
