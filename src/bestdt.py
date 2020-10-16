@@ -1,11 +1,8 @@
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import GridSearchCV
 import numpy as np
-from sklearn.metrics import confusion_matrix
-from sklearn.metrics import classification_report
-import output_file_creator
 
-def run(test, train, val, info, dataset):
+def run(test, train):
     
     print("Running Best Decision Tree...")
     print("Running Grid Search to find the Best Decision Tree configuration...")
@@ -33,16 +30,5 @@ def run(test, train, val, info, dataset):
     
     print("Best parameters: ", clf.best_params_)
     print("Done!")
-    
 
-    print('Creating output file...')
-
-    class_labels = np.arange(0, len(info))
-    confusion_mat = confusion_matrix(test_y, y_pred)
-    class_report = classification_report(test_y, y_pred, labels = class_labels, output_dict = True)
-    output_file_creator.create_csv('Best-DT', np.arange(1, len(test_x)+1), y_pred, confusion_mat, class_report,dataset)
-    
-    print("Done!")
-
-
-    return y_pred
+    return test_y, y_pred

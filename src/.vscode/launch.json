@@ -22,6 +22,23 @@
             "args": ["best-mlp", "2", "-narch1", "30", "50", "-narch2", "10", "10", "10"]
         },
         {
+            "name": "Python: Best-MLP 1 Visual",
+            "type": "python",
+            "request": "launch",
+            "program": "main.py",
+            "console": "integratedTerminal",
+            "args": ["best-mlp", "1", "-narch1", "30", "50", "-narch2", "10", "10", "10", "-visual"]
+        },
+        
+        {
+            "name": "Python: Best-MLP 2 Visual",
+            "type": "python",
+            "request": "launch",
+            "program": "main.py",
+            "console": "integratedTerminal",
+            "args": ["best-mlp", "2", "-narch1", "30", "50", "-narch2", "10", "10", "10", "-visual"]
+        },
+        {
             "name": "Python: Base-MLP 1",
             "type": "python",
             "request": "launch",
@@ -44,6 +61,30 @@
             ]
         },
         {
+            "name": "Python: Base-MLP 1 Visual",
+            "type": "python",
+            "request": "launch",
+            "program": "main.py",
+            "console": "integratedTerminal",
+            "args": [
+                "base-mlp",
+                "1",
+                "-visual"
+            ]
+        },
+        {
+            "name": "Python: Base-MLP 2 Visual",
+            "type": "python",
+            "request": "launch",
+            "program": "main.py",
+            "console": "integratedTerminal",
+            "args": [
+                "base-mlp",
+                "2",
+                "-visual"
+            ]
+        },
+        {
             "name": "Python: Per 1",
             "type": "python",
             "request": "launch",
@@ -62,7 +103,31 @@
             "console": "integratedTerminal",
             "args": [
                 "per",
-                "1"
+                "2"
+            ]
+        },
+        {
+            "name": "Python: Per 1 Visual",
+            "type": "python",
+            "request": "launch",
+            "program": "main.py",
+            "console": "integratedTerminal",
+            "args": [
+                "per",
+                "1",
+                "-visual"
+            ]
+        },
+        {
+            "name": "Python: Per 2 Visual",
+            "type": "python",
+            "request": "launch",
+            "program": "main.py",
+            "console": "integratedTerminal",
+            "args": [
+                "per",
+                "2",
+                "-visual"
             ]
         },
         {
@@ -88,6 +153,30 @@
             ]
         },
         {
+            "name": "Python: Best-DT 1 Visual",
+            "type": "python",
+            "request": "launch",
+            "program": "main.py",
+            "console": "integratedTerminal",
+            "args": [
+                "best-dt",
+                "1",
+                "-visual"
+            ]
+        },
+        {
+            "name": "Python: Best-DT 2 Visual",
+            "type": "python",
+            "request": "launch",
+            "program": "main.py",
+            "console": "integratedTerminal",
+            "args": [
+                "best-dt",
+                "2",
+                "-visual"
+            ]
+        },
+        {
             "name": "Python: Base-DT 1",
             "type": "python",
             "request": "launch",
@@ -110,6 +199,30 @@
             ]
         },
         {
+            "name": "Python: Base-DT 1 Visual",
+            "type": "python",
+            "request": "launch",
+            "program": "main.py",
+            "console": "integratedTerminal",
+            "args": [
+                "base-dt",
+                "1",
+                "-visual"
+            ]
+        },
+        {
+            "name": "Python: Base-DT 2 Visual",
+            "type": "python",
+            "request": "launch",
+            "program": "main.py",
+            "console": "integratedTerminal",
+            "args": [
+                "base-dt",
+                "2",
+                "-visual"
+            ]
+        },
+        {
             "name": "Python: GNB 1",
             "type": "python",
             "request": "launch",
@@ -118,29 +231,6 @@
             "args": [
                 "gnb",
                 "1"
-            ]
-        },{
-            "name": "Python: GNB 1 V",
-            "type": "python",
-            "request": "launch",
-            "program": "main.py",
-            "console": "integratedTerminal",
-            "args": [
-                "gnb",
-                "1",
-                "-visual"
-            ]
-        },
-        {
-            "name": "Python: GNB 2 V",
-            "type": "python",
-            "request": "launch",
-            "program": "main.py",
-            "console": "integratedTerminal",
-            "args": [
-                "gnb",
-                "2",
-                "-visual"
             ]
         },
         {
@@ -152,6 +242,29 @@
             "args": [
                 "gnb",
                 "2"
+            ]
+        },{
+            "name": "Python: GNB 1 Visual",
+            "type": "python",
+            "request": "launch",
+            "program": "main.py",
+            "console": "integratedTerminal",
+            "args": [
+                "gnb",
+                "1",
+                "-visual"
+            ]
+        },
+        {
+            "name": "Python: GNB 2 Visual",
+            "type": "python",
+            "request": "launch",
+            "program": "main.py",
+            "console": "integratedTerminal",
+            "args": [
+                "gnb",
+                "2",
+                "-visual"
             ]
         },
         {

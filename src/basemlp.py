@@ -1,6 +1,4 @@
 from sklearn.neural_network import MLPClassifier
-from sklearn.metrics import classification_report, confusion_matrix
-import output_file_creator
 
 #https://stackoverflow.com/questions/53784971/how-to-disable-convergencewarning-using-sklearn
 #from sklearn.utils._testing import ignore_warnings
@@ -10,7 +8,7 @@ import numpy as np
 
 #Base MLP is not converging! Code still runs so it's ok. Though it's not exactly optimal.
 #@ignore_warnings(category=ConvergenceWarning)
-def run(test, train, info, dataset):
+def run(test, train):
     print("Running Base Multi Layer Perceptron...")
 
     test_x = np.delete(test, -1, 1)
@@ -27,13 +25,4 @@ def run(test, train, info, dataset):
 
     print("Done!")
 
-    print('Creating output file...')
-
-    class_labels = np.arange(0, len(info)) 
-    confusion_mat = confusion_matrix(test_y, y_pred)
-    class_report = classification_report(test_y, y_pred, labels = class_labels, output_dict = True, zero_division=0)
-    output_file_creator.create_csv('Base-MLP', np.arange(1, len(test_x)+1), y_pred, confusion_mat, class_report,dataset)
-
-    print("Done!")
-
-    return y_pred
+    return test_y, y_pred

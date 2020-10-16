@@ -1,11 +1,11 @@
 #####By Ihsaan Malek and Olivier Racette####
 
 #External dependencies
-#import sklearn    #might be better to import specific things in each file
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap
-
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import classification_report
 
 #Default modules
 import csv
@@ -17,6 +17,7 @@ from pathlib import Path
 
 #Algorithms
 import basedt, basemlp, bestdt, bestmlp, gnb, per
+import output_file_creator
 
 
 #potential globals? will be moved if needed
@@ -144,37 +145,39 @@ def run():
     #theres probably a better way to do this.
     #does validation need to be passed? seems like its not really used here. 
 
-    result = 0
+    real = 0
+    prediction = 0
 
     start_time = time.time()
 
     if args.algo == possible_algo[0]:
-        result = gnb.run(test_with_label, training, info, dataset)
+        real, prediction = gnb.run(test_with_label, training)
     elif args.algo == possible_algo[1]:
-        result = basedt.run(test_with_label, training, info, dataset)
+        real, prediction = basedt.run(test_with_label, training)
     elif args.algo == possible_algo[2]:
-        result = bestdt.run(test_with_label, training, validation, info, dataset)
+        real, prediction = bestdt.run(test_with_label, training)
     elif args.algo == possible_algo[3]:
-        result = per.run(test_with_label, training, validation, info, dataset)
+        real, prediction = per.run(test_with_label, training)
     elif args.algo == possible_algo[4]:
-        result = basemlp.run(test_with_label, training, info, dataset)
+        real, prediction = basemlp.run(test_with_label, training)
     elif args.algo == possible_algo[5]:
-        result = bestmlp.run(test_with_label, training, validation, info, dataset, args.narch1, args.narch2)
+        real, prediction = bestmlp.run(test_with_label, training, args.narch1, args.narch2)
 
     print("Execution time: " + str(round(time.time() - start_time, 2)) + " seconds.")
 
+    print('Creating output file...')
+
+    conf_matrix = confusion_matrix(real, prediction)
+    report = classification_report(real, prediction, labels = np.arange(0, len(info)), output_dict = True, zero_division=0)
+    output_file_creator.create_csv(args.algo, np.arange(1, len(test_no_label)+1), prediction, conf_matrix, report,dataset)
+
+    print("Done!")
+
+
     if args.visual:
         for i in range(num_vis_samples):
-            index = random.randint(0, len(result)-1)
-            visualize_sample(test_no_label[index], info[test_with_label[index][-1]], info[result[index]])       #holy moly brackets!
-
-    #should the algorithms return predictions? and from here (this file) compute the rest of results, since its the same computation for every algo?
-    analyze(test_with_label, validation, result)
-
-
-#Seems like every algorihtm returns a similar result, prediction of y values. we can probably use the same method to analyze results of each
-def analyze(test, validation, prediction):
-    return 0
+            index = random.randint(0, len(prediction)-1)
+            visualize_sample(test_no_label[index], info[test_with_label[index][-1]], info[prediction[index]])       #holy moly brackets!
 
 
 if __name__ == "__main__":

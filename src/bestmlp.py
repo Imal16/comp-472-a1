@@ -1,12 +1,9 @@
 from sklearn.neural_network import MLPClassifier
 from sklearn.model_selection import GridSearchCV
-from sklearn.metrics import classification_report, confusion_matrix
-
 import numpy as np
-import output_file_creator
 
 
-def run(test, train, val, info, dataset, narch1, narch2):
+def run(test, train, narch1, narch2):
     print("Running Grid Search to find the Best Multi Layer Perceptron configuration...")
 
     print("Network architecture 1:")
@@ -39,17 +36,7 @@ def run(test, train, val, info, dataset, narch1, narch2):
     clf = GridSearchCV(mlp, params, n_jobs=-1)
     y_pred = clf.fit(train_x, train_y).predict(test_x)
 
-    print("Best parameters found: ", clf.best_params_)
+    print("Best parameters: ", clf.best_params_)
     print("Done!")
 
-    print('Creating output file...')
-
-    class_labels = np.arange(0, len(info))
-    confusion_mat = confusion_matrix(test_y, y_pred)
-    class_report = classification_report(test_y, y_pred, labels = class_labels, output_dict = True)
-    output_file_creator.create_csv('Best-MLP', np.arange(1, len(test_x)+1), y_pred, confusion_mat, class_report,dataset)
-
-    print("Done!")
-    
-
-    return y_pred
+    return test_y, y_pred
