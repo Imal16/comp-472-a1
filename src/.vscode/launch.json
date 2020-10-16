@@ -8,7 +8,7 @@
             "name": "Python: Best-MLP",
             "type": "python",
             "request": "launch",
-            "program": "${file}",
+            "program": "main.py",
             "console": "integratedTerminal",
             "args": ["best-mlp", "1","-func", "sigmoid", "-layers", "1", "-nodes", "30+50", "-solver", "adam"]
         },
@@ -16,7 +16,7 @@
             "name": "Python: Base-MLP",
             "type": "python",
             "request": "launch",
-            "program": "${file}",
+            "program": "main.py",
             "console": "integratedTerminal",
             "args": [
                 "base-mlp",
@@ -27,7 +27,7 @@
             "name": "Python: Percecptron",
             "type": "python",
             "request": "launch",
-            "program": "${file}",
+            "program": "main.py",
             "console": "integratedTerminal",
             "args": [
                 "per",
@@ -35,31 +35,32 @@
             ]
         },
         {
-            "name": "Python: Best-DT",
+            "name": "Python: Best-DT 1",
             "type": "python",
             "request": "launch",
-            "program": "${file}",
+            "program": "main.py",
             "console": "integratedTerminal",
             "args": [
                 "best-dt",
-                "1",
-                "-split",
-                "gini",
-                "-depth",
-                "10",
-                "-samples",
-                "5",
-                "-impurity",
-                "5",
-                "-weight",
-                "none",
+                "1"
             ]
         },
         {
-            "name": "Python: Base-DT",
+            "name": "Python: Best-DT 2",
             "type": "python",
             "request": "launch",
-            "program": "${file}",
+            "program": "main.py",
+            "console": "integratedTerminal",
+            "args": [
+                "best-dt",
+                "2"
+            ]
+        },
+        {
+            "name": "Python: Base-DT 1",
+            "type": "python",
+            "request": "launch",
+            "program": "main.py",
             "console": "integratedTerminal",
             "args": [
                 "base-dt",
@@ -67,10 +68,21 @@
             ]
         },
         {
+            "name": "Python: Base-DT 2",
+            "type": "python",
+            "request": "launch",
+            "program": "main.py",
+            "console": "integratedTerminal",
+            "args": [
+                "base-dt",
+                "2"
+            ]
+        },
+        {
             "name": "Python: GNB 1",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}\\src\\main.py",
+            "program": "main.py",
             "console": "integratedTerminal",
             "args": [
                 "gnb",
@@ -80,7 +92,7 @@
             "name": "Python: GNB 2",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}\\src\\main.py",
+            "program": "main.py",
             "console": "integratedTerminal",
             "args": [
                 "gnb",
@@ -91,7 +103,7 @@
             "name": "Python: No Args",
             "type": "python",
             "request": "launch",
-            "program": "${file}",
+            "program": "main.py",
             "console": "integratedTerminal"
         }
     ]
