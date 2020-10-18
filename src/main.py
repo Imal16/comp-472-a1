@@ -169,7 +169,7 @@ def run():
 
     conf_matrix = confusion_matrix(real, prediction)
     report = classification_report(real, prediction, labels = np.arange(0, len(info)), output_dict = True, zero_division=0)
-    output_file_creator.create_csv(args.algo, np.arange(1, len(test_no_label)+1), prediction, conf_matrix, report,dataset)
+    output_file_creator.create_csv(args.algo.upper(), np.arange(1, len(test_no_label)+1), prediction, conf_matrix, report,dataset)
 
     print("Done!")
 

@@ -10,7 +10,7 @@ def run(test, train):
     test_x = np.delete(test, -1, 1)
     test_y = test[:,-1]    
     
-    clf = tree.DecisionTreeClassifier()
+    clf = tree.DecisionTreeClassifier(criterion = 'entropy')
     y_pred = clf.fit(train_x, train_y).predict(test_x)
     
     print("Done!")
