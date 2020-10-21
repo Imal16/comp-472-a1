@@ -79,15 +79,15 @@ def calc_distrib(data, info):
 
 
 #Plots the distribution of training, validation and test in a 3 bar graph
-def plot_distrib(train_distrib, val_distrib, test_distrib, info):
+def plot_distrib(train_distrib, val_distrib, info):
     fig, ax = plt.subplots()
     width = 0.25
 
     x = np.arange(len(info))
 
-    ax.bar(x - width, train_distrib, width, label="Trainig")
+    ax.bar(x - width, train_distrib, width, label="Training")
     ax.bar(x, val_distrib, width, label="Validation")
-    ax.bar(x + width, test_distrib, width, label="Test")
+    #ax.bar(x + width, test_distrib, width, label="Test")
 
 
     #setting custom labels: put symbols (user input) instead of numbers on the x avis
@@ -107,9 +107,9 @@ def plot_distrib(train_distrib, val_distrib, test_distrib, info):
 
 #Shows the character a sample is supposed to represent.
 #Assumes the sample is an array of length 1024
-def visualize_sample(sample, real, predict):
+def visualize_sample(sample, predict):
     plt.matshow(sample.reshape(32 ,32), cmap=ListedColormap(['k', 'w']))
-    plt.text(-6, -3, "Prediction: " + predict + "\nReal: " + real)
+    plt.text(-6, -3, "Prediction: " + predict)
     plt.show()
 
 
@@ -121,7 +121,7 @@ def run():
     print("Reading csv data from dataset " + dataset + "...")
 
     test_no_label = get_data("test_no_label_" + dataset + ".csv")
-    test_with_label = get_data("test_with_label_"+ dataset + ".csv")
+    #test_with_label = get_data("test_with_label_"+ dataset + ".csv")
     training = get_data("train_" + dataset + ".csv")
     validation = get_data("val_" + dataset + ".csv")
     info = buildSymbolTable("info_" + dataset + ".csv")    
@@ -132,52 +132,54 @@ def run():
     print("Calculating data distribution...")
     train_distrib = calc_distrib(training, info)
     valid_distrib = calc_distrib(validation, info)
-    test_distrib = calc_distrib(test_with_label, info)
+    #test_distrib = calc_distrib(test_no_label, info)
     print("Done!")
 
 
     if args.visual:
         print("Plotting...")
-        plot_distrib(train_distrib, valid_distrib, test_distrib, info)
+        plot_distrib(train_distrib, valid_distrib, info)
 
 
     #forgot switch statements don't exist in python. bunch of if elif coming soon.
     #theres probably a better way to do this.
     #does validation need to be passed? seems like its not really used here. 
 
-    real = 0
+    #real = 0
     prediction = 0
 
     start_time = time.time()
 
     if args.algo == possible_algo[0]:
-        real, prediction = gnb.run(test_with_label, training)
+        prediction = gnb.run(test_no_label, training)
     elif args.algo == possible_algo[1]:
-        real, prediction = basedt.run(test_with_label, training)
+        prediction = basedt.run(test_no_label, training)
     elif args.algo == possible_algo[2]:
-        real, prediction = bestdt.run(test_with_label, training)
+        prediction = bestdt.run(test_no_label, training)
     elif args.algo == possible_algo[3]:
-        real, prediction = per.run(test_with_label, training)
+        prediction = per.run(test_no_label, training)
     elif args.algo == possible_algo[4]:
-        real, prediction = basemlp.run(test_with_label, training)
+        prediction = basemlp.run(test_no_label, training)
     elif args.algo == possible_algo[5]:
-        real, prediction = bestmlp.run(test_with_label, training, args.narch1, args.narch2)
+        prediction = bestmlp.run(test_no_label, training, args.narch1, args.narch2)
 
     print("Execution time: " + str(round(time.time() - start_time, 2)) + " seconds.")
 
-    print('Creating output file...')
+    print(prediction)
 
-    conf_matrix = confusion_matrix(real, prediction)
-    report = classification_report(real, prediction, labels = np.arange(0, len(info)), output_dict = True, zero_division=0)
-    output_file_creator.create_csv(args.algo.upper(), np.arange(1, len(test_no_label)+1), prediction, conf_matrix, report,dataset)
+    #print('Creating output file...')
 
-    print("Done!")
+    #conf_matrix = confusion_matrix(real, prediction)
+    #report = classification_report(real, prediction, labels = np.arange(0, len(info)), output_dict = True, zero_division=0)
+    #output_file_creator.create_csv(args.algo.upper(), np.arange(1, len(test_no_label)+1), prediction, conf_matrix, report,dataset)
+
+    #print("Done!")
 
 
     if args.visual:
         for i in range(num_vis_samples):
             index = random.randint(0, len(prediction)-1)
-            visualize_sample(test_no_label[index], info[test_with_label[index][-1]], info[prediction[index]])       #holy moly brackets!
+            visualize_sample(test_no_label[index], info[prediction[index]])       #holy moly brackets!
 
 
 if __name__ == "__main__":

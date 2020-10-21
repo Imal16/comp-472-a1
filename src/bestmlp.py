@@ -19,8 +19,8 @@ def run(test, train, narch1, narch2):
     for i in range(len(narch2)):
         print("\tNumber of nodes in hidden layer #" + str(i+1) + ": " + str(narch2[i]))
 
-    test_x = np.delete(test, -1, 1)
-    test_y = test[:,-1]
+    #test_x = np.delete(test, -1, 1)
+    #test_y = test[:,-1]
 
     train_x = np.delete(train, -1, 1)
     train_y = train[:,-1]
@@ -34,9 +34,9 @@ def run(test, train, narch1, narch2):
     }
 
     clf = GridSearchCV(mlp, params, n_jobs=-1)
-    y_pred = clf.fit(train_x, train_y).predict(test_x)
+    y_pred = clf.fit(train_x, train_y).predict(test)
 
     print("Best parameters: ", clf.best_params_)
     print("Done!")
 
-    return test_y, y_pred
+    return y_pred

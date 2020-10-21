@@ -7,12 +7,12 @@ def run(test, train):
     train_x = np.delete(train, -1, 1)
     train_y = train[:,-1]
     
-    test_x = np.delete(test, -1, 1)
-    test_y = test[:,-1]    
+    #test_x = np.delete(test, -1, 1)
+    #test_y = test[:,-1]    
     
     clf = tree.DecisionTreeClassifier(criterion = 'entropy')
-    y_pred = clf.fit(train_x, train_y).predict(test_x)
+    y_pred = clf.fit(train_x, train_y).predict(test)
     
     print("Done!")
     
-    return test_y, y_pred
+    return y_pred

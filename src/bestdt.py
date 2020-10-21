@@ -10,8 +10,8 @@ def run(test, train):
     train_x = np.delete(train, -1, 1)
     train_y = train[:,-1]
     
-    test_x = np.delete(test, -1, 1)
-    test_y = test[:,-1]
+    #test_x = np.delete(test, -1, 1)
+    #test_y = test[:,-1]
 
     default_range = np.linspace(0,10,10,dtype=int).astype(float).tolist()
     default_range2 = np.linspace(2,12,10,dtype=int).tolist()
@@ -26,9 +26,9 @@ def run(test, train):
     dt = DecisionTreeClassifier()
     
     clf = GridSearchCV(estimator = dt, param_grid = params, n_jobs=-1)
-    y_pred = clf.fit(train_x, train_y).predict(test_x)
+    y_pred = clf.fit(train_x, train_y).predict(test)
     
     print("Best parameters: ", clf.best_params_)
     print("Done!")
 
-    return test_y, y_pred
+    return y_pred

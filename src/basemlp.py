@@ -11,8 +11,8 @@ import numpy as np
 def run(test, train):
     print("Running Base Multi Layer Perceptron...")
 
-    test_x = np.delete(test, -1, 1)
-    test_y = test[:,-1]
+    #test_x = np.delete(test, -1, 1)
+    #test_y = test[:,-1]
 
     train_x = np.delete(train, -1, 1)
     train_y = train[:,-1]
@@ -21,8 +21,8 @@ def run(test, train):
 
     #1 hidden layer of 100 neurons, sigmoid/logistic activation function, stochastic gradient descent, rest is default
     mlp = MLPClassifier(hidden_layer_sizes=(100,), activation="logistic", solver="sgd") 
-    y_pred = mlp.fit(train_x, train_y).predict(test_x)
+    y_pred = mlp.fit(train_x, train_y).predict(test)
 
     print("Done!")
 
-    return test_y, y_pred
+    return y_pred
