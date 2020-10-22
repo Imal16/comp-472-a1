@@ -165,15 +165,15 @@ def run():
 
     print("Execution time: " + str(round(time.time() - start_time, 2)) + " seconds.")
 
-    print(prediction)
+    #print(prediction)
 
-    #print('Creating output file...')
+    print('Creating output file...')
 
     #conf_matrix = confusion_matrix(real, prediction)
     #report = classification_report(real, prediction, labels = np.arange(0, len(info)), output_dict = True, zero_division=0)
-    #output_file_creator.create_csv(args.algo.upper(), np.arange(1, len(test_no_label)+1), prediction, conf_matrix, report,dataset)
+    output_file_creator.create_csv(args.algo.upper(), np.arange(1, len(test_no_label)+1), prediction, dataset)
 
-    #print("Done!")
+    print("Done!")
 
 
     if args.visual:

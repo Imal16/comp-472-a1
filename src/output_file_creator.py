@@ -9,7 +9,7 @@ import os
 import csv
 import numpy as np
 
-def create_csv(filename, test_y, y_pred, confusion_mat, class_report,dataset):
+def create_csv(filename, test_y, y_pred, dataset):
     
     result = np.column_stack((test_y, y_pred))
     file_path ="../result/{}-DS{}.csv".format(filename,dataset)
@@ -20,9 +20,9 @@ def create_csv(filename, test_y, y_pred, confusion_mat, class_report,dataset):
     
     np.savetxt(file_path,result, fmt='%i',delimiter=",")
     
-    with open(file_path, 'a') as result_csv:
+    """with open(file_path, 'a') as result_csv:
         csvWriter = csv.writer(result_csv, delimiter = ',')
         csvWriter.writerows(confusion_mat)
     
         for classes in class_report:
-             csvWriter.writerow((classes, class_report[classes]))
+             csvWriter.writerow((classes, class_report[classes]))"""
